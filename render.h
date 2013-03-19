@@ -1,6 +1,10 @@
 /*
  * render.h
  */
+typedef struct _device
+{
+    int global_data;
+} device;
 
 typedef struct _mesh
 {
@@ -37,14 +41,14 @@ typedef struct _render_target
 extern "C" {
 #endif
 
-void render_init( void );
-void render_draw_mesh( render_target* target, mesh* mesh, transform m );
+void render_init( device* device );
+void render_draw_mesh( device* device, render_target* target, mesh* mesh, transform m );
 
-render_target* render_create_target( unsigned int width, unsigned int height );
-mesh* render_create_mesh( void* mesh_data );
-texture* render_create_texture( void* texture_data );
-shader* render_create_vertex_shader( const char* shader_source );
-shader* render_create_pixel_shader( const char* shader_source );
+render_target* render_create_target( device* device, unsigned int width, unsigned int height );
+mesh* render_create_mesh( device* device, void* mesh_data );
+texture* render_create_texture( device* device, void* texture_data );
+shader* render_create_vertex_shader( device* device, const char* shader_source );
+shader* render_create_pixel_shader( device* device, const char* shader_source );
 
 #ifdef __cplusplus
 }
